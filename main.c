@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include <mylib.h>
+#include <my_mat.h>
+
 int main(){
     printf("start");
 char ch;
