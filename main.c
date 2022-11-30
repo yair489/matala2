@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <mylib.h>
 int main(){
     printf("start");
 char ch;
@@ -13,6 +13,7 @@ do
     {
     case 'A':
         /* code */
+
         printf("in a");
         static int mat[10][10]={0};
         int x;
