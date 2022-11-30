@@ -14,18 +14,7 @@ do
     {
     case 'A':
         /* code */
-
-        printf("in a");
-        static int mat[10][10]={0};
-        int x;
-        for (size_t i = 0; i < 10; i++)
-        {
-            for (size_t j = 0; j < 10; j++)
-            {
-                /* to inilaize the mat */
-                mat[i][j]= scanf("%d",& x);
-            }
-        }
+      building();
         break;
     case 'B':
         /* code */
