@@ -1,47 +1,53 @@
 #include <stdio.h>
-#include <my_mat.h>
+#include "my_mat.h"
+#include <stdbool.h>
 
 int main(){
-    printf("start");
-char ch;
-int boolean =1;
+printf("start");
+char input;
+bool is_D =false;
 do
 {
     
-    scanf("%c",&ch);
-    int ch_num = (int)ch;
+    scanf(" %c",&input);
+    int ch_num = (int)input;
+
     switch (ch_num)
     {
     case 'A':
-        /* code */
-      building();
+        printf("in A");
+        building();
+        printf("\nbuild!\n");
         break;
+
     case 'B':
-        /* code */
-        printf("in c");
+
+        printf("in B");
         int a, b;
-        scanf("%d",&a);
-        scanf("%d",&b);
+        scanf(" %d",&a);
+        scanf(" %d",&b);
         exsistpath(a, b);
         break;
+
     case 'C':
-        /* code */
-        printf("un c");
-       int c,d ;
-        scanf("%d",&c);
-        scanf("%d",&d); 
-        shortpath(c ,d);
+
+        printf("in C");
+        int c,d ;
+        scanf(" %d",&c);
+        scanf(" %d",&d); 
+        shortPath(c ,d);
+
         break;
-     case 'D':
-     printf("in d");
-        boolean =0;
-     break;
+
+    case 'D':
+    
+        printf("in D");
+        is_D =true;
+        break;
+
     default:
         break;
-    
     }
-} while (boolean);
-
-
+} while (!is_D);
     return 0;
 }
