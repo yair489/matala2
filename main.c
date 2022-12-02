@@ -3,7 +3,6 @@
 #define NUMBER 3
 
 int main(){
-    printf("start\n");
 char ch;
 int boolean =1;
 do
@@ -15,16 +14,13 @@ do
     {
     case 'A':
         /* code */
-        printf("in a\n");
         building();
-        printf("FINISH\n");
         break;
 
     case 'B':
         /* code */
        
         int a, b;
-        printf("in B\n");
         scanf("%d",&a);
         scanf("%d",&b);
         exsistpath(a, b);
@@ -36,12 +32,10 @@ do
        int c,d ;
         scanf("%d",&c);
         scanf("%d",&d); 
-        printf("un c\n");
         shortpath(c ,d);
         break;
 
      case 'D':
-     printf("in d\n");
         boolean =0;
      break;
 

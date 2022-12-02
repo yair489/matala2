@@ -1,107 +1,84 @@
 #include <stdio.h>
-#include <math.h>  
-#include "my_mat.h"
 #include <stdbool.h>
-#define NUMBER 3
+#include <math.h>
+#include "my_mat.h"
 
-static int mat[NUMBER][NUMBER]={0};
-static bool isPathMatbuild;
 
-int minn(int a , int b){
-    if (a<b)
-    {
-        return a;
-    }
+#define MATRIX_NUM 10
+
+
+//STATICS:
+
+static int mat_master[MATRIX_NUM][MATRIX_NUM]={0};//matrix that help for culculate the path
+int minn(int a, int b){
+    if(a<b){return a;}
     return b;
 }
-void building(){
-    for (size_t i = 0; i < NUMBER; i++)
-        {
-            for (size_t j = 0; j < NUMBER; j++)
-            {
-                /* code */
-                mat[i][j]= 0;
-                printf(" %d", mat[i][j]);
-            }  
-                            printf("/n  CLEAN \n");
- 
-        }
-    
-        int x;
-        for (size_t i = 0; i < NUMBER; i++)
-        {
-            for (size_t j = 0; j < NUMBER; j++)
-            {
-                /* to inilaize the mat */
-                scanf("%d",&x);
-                mat[i][j]= x;
-                printf("%d ", mat[i][j]);
 
-            }
-            printf("/n  WHAT \n\n");
-    } 
-     isPathMatbuild=true;   
-}
-
-
-void pathmat(int (*)[]){
-    int mat_path[NUMBER][NUMBER]={0};
-    for (size_t k = 0; k < NUMBER; k++)
+ /*biuld mat_path matrix*/
+void buildPathMat(){
+    //int mat_path[MATRIX_NUM][MATRIX_NUM]={0};
+    for (size_t k = 0; k < MATRIX_NUM; k++)
     {
         /* code */
-        for (size_t i = 0; i < NUMBER; i++)
+        for (size_t i = 0; i < MATRIX_NUM; i++)
         {
-            for (size_t j = 0; j < NUMBER;j++)
+            for (size_t j = 0; j < MATRIX_NUM;j++)
             {
                 /* code */
                 if (i==j)
                 {
-                    mat_path[i][j]=0;
+                    mat_master[i][j]=0;
                 }
                 else if (i==k || j==k)
                 {
-                    mat_path[i][j]=mat[i][j];
+                    mat_master[i][j]=mat_master[i][j];
                 }
-                else if( (mat[k][j] == 0) || (mat[i][k] == 0) ){
+                else if( (mat_master[k][j] == 0) || (mat_master[i][k] == 0) ){
                     
-                    mat_path[i][j]=mat[i][j];
+                    mat_master[i][j]=mat_master[i][j];
                 }
-                else if( mat[i][j] == 0 ){
-                    mat_path[i][j] = mat[k][j] + mat[i][k];
+                else if( mat_master[i][j] == 0 ){
+                    mat_master[i][j] = mat_master[k][j] + mat_master[i][k];
                 }
                 else{
-                    mat_path[i][j] = minn( (mat[i][j]) , (mat[k][j] + mat[i][k]) );
+                    mat_master[i][j] = minn( (mat_master[i][j]) , (mat_master[k][j] + mat_master[i][k]) );
                 }
                 
-                mat[i][j] = mat_path[i][j];//copy mat_path for the matrix k+1
             }      
         }
-        for (size_t i = 0; i < NUMBER; i++)
-        {
-            for (size_t j = 0; j < NUMBER; j++)
-            {
-                /* code */
-                mat[i][j]= mat_path[i][j];
-                printf(" %d", mat[i][j]);
-            }   
-        }
-        printf("/n\n");
+        
     }
-    
-     isPathMatbuild = false ;
 }
+/*get matrix with NxN numbers from the scanner, that represent graph*/
+ void building(){
+    
+        
+        int input;
+        for (size_t i = 0; i < MATRIX_NUM; i++)//Row
+        {
+            for (size_t j = 0; j < MATRIX_NUM; j++)//Coll
+            {
+                /* to inilaize the matrix */
+                scanf(" %d",&input);
+                mat_master[i][j]= input;
+            }
+        }
+        
+        buildPathMat();
+ }
  
 void exsistpath(int a, int b){
-if(isPathMatbuild){
-    pathmat(mat);
+if(mat_master[a][b]==0)printf("False\n");
+else printf("True\n");
 }
-if(mat[a][b]==0)printf("FALSE");
-else printf("TRUE");
-}
+
 void shortpath(int c ,int d){
-if(isPathMatbuild){
-    pathmat(mat);
-}
-    int x = mat[c][d];
-    printf("%x",x);
+    if (mat_master[c][d]== 0)
+    {
+    printf("-1\n");
+    }else{    
+    int x = mat_master[c][d];
+    printf("%d\n",x);
+    }
 }
