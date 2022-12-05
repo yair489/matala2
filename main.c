@@ -1,15 +1,16 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include "my_mat.h"
-#define NUMBER 3
+
 
 int main(){
-char ch;
-int boolean =1;
+char input;
+bool flag =true;//when to stop the program
 do
 {
     
-    scanf("%c",&ch);
-    int ch_num = (int)ch;
+    scanf("%c",&input);
+    int ch_num = (int)input;
     switch (ch_num)
     {
     case 'A':
@@ -36,14 +37,14 @@ do
         break;
 
      case 'D':
-        boolean =0;
+        flag =false;
      break;
 
     default:
         break;
     
     }
-} while (boolean);
+} while (flag);
 
 
     return 0;
