@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <math.h>
 #include "my_mat.h"
 
 #define MATRIX_NUM 10
@@ -9,7 +8,7 @@
 //our statics matrix:
 static int mat_master[MATRIX_NUM][MATRIX_NUM]={0};//matrix that help for culculate the path
 
-int minn(int a, int b){//return min
+int min(int a, int b){//return min
     if(a<b){return a;}
     return b;
 }
@@ -39,8 +38,8 @@ void buildPathMat(){
                 else if( mat_master[i][j] == 0 ){//infinity, so we prefere the other way
                     mat_master[i][j] = mat_master[k][j] + mat_master[i][k];
                 }
-                else{//non is infinity, so which is shorter?
-                    mat_master[i][j] = minn( (mat_master[i][j]) , (mat_master[k][j] + mat_master[i][k]) );
+                else{//no one is infinity, so which is shorter?
+                    mat_master[i][j] = min( (mat_master[i][j]) , (mat_master[k][j] + mat_master[i][k]) );
                 }
                 
             }      
