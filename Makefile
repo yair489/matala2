@@ -4,7 +4,7 @@ OBJS = main.o my_mat.o
 
 # Specify the compiler and compiler flags
 CC = gcc
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -lm
 
 # Define the valgrind command and flags
 VALGRIND = valgrind
@@ -35,7 +35,7 @@ run: $(TARGET)
 # Define the target for running the valgrind test
 valgrind: $(TARGET)
 	$(VALGRIND) $(VFLAGS) ./$(TARGET)
-    
+
 # Define the target for cleaning up the directory
 clean:
-	rm -f *.o *.a *.so connections
+	rm -f *.o *.a *.so *.txt connections
