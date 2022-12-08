@@ -1,10 +1,14 @@
-# Specify the target file and the object files
+# Specify the target file and the main object files
 TARGET = connections
-OBJS = main.o my_mat.o
+MAIN_OBJS = main.o 
+
+# Specify the target library file and the object files
+LIBRARY = my_mat.a
+LIB_OBJECT = my_mat.o
 
 # Specify the compiler and compiler flags
 CC = gcc
-CFLAGS = -Wall -g -lm
+CFLAGS = -Wall -g -lm -fPIC
 
 # Define the valgrind command and flags
 VALGRIND = valgrind
@@ -14,19 +18,22 @@ VFLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
 .PHONY: clean run valgrind
 
 # Define the default target (to build the program)
-all: $(TARGET)
+all: $(LIBRARY) $(TARGET)
 
 # Define the target for building the program
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+$(TARGET): $(MAIN_OBJS) $(LIBRARY)
+	$(CC) $(CFLAGS) -o $(TARGET) $(MAIN_OBJS) $(LIBRARY)
 
 # Define the targets for each object file
 main.o: main.c my_mat.h
 	$(CC) $(CFLAGS) -c main.c
 
-
 my_mat.o: my_mat.c my_mat.h
 	$(CC) $(CFLAGS) -c my_mat.c
+
+#Define the target for building the library
+$(LIBRARY): $(LIB_OBJECT) 
+	ar -rcs $(LIBRARY) $(LIB_OBJECT)
 
 # Define the target for running the program
 run: $(TARGET)
